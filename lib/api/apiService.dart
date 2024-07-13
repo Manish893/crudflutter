@@ -17,4 +17,6 @@ abstract class ApiService {
   Future<ApiResponse> checkLogin(LoginModel loginModel);
   //task
   Future<ApiResponse> task(TestModel testModel);
+  //yesma login vanya chaii signup xa ani checklogin vanya chaii login ho
+  Future<ApiResponse> checkUserDataOnLogin(LoginModel loginModel);
 }

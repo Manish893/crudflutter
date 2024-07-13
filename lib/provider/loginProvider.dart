@@ -134,4 +134,24 @@ class LoginProvider extends ChangeNotifier {
       setDeleteStatus(NetworkStatus.error);
     }
   }
+
+  NetworkStatus _setCheckUserExistOnLoginStatus = NetworkStatus.ldel;
+  NetworkStatus get getSetCheckUsetExistOnLoginStatus =>
+      _setCheckUserExistOnLoginStatus;
+  setCheckUsetExistOnLoginStatus(NetworkStatus status) {
+    _setCheckUserExistOnLoginStatus = status;
+  }
+
+  checkUserExistOnLogin() async {
+    if (_setCheckUserExistOnLoginStatus != NetworkStatus.loading) {
+      setCheckUsetExistOnLoginStatus(NetworkStatus.loading);
+    }
+    LoginModel loginModel = LoginModel(contact: contact);
+    ApiResponse response = await apiService.checkUserDataOnLogin(loginModel);
+    if (response.networkStatus == NetworkStatus.success) {
+      setCheckUsetExistOnLoginStatus(NetworkStatus.success);
+    } else if (response.networkStatus == NetworkStatus.error) {
+      setCheckUsetExistOnLoginStatus(NetworkStatus.error);
+    }
+  }
 }

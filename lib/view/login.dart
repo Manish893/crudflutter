@@ -6,7 +6,6 @@ import 'package:bdelete/view/loginHome.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class Login extends StatefulWidget {
   LoginModel? loginModel;
   Login({super.key, this.loginModel});
@@ -39,7 +38,7 @@ class _LoginState extends State<Login> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  loginProvider.getStatus == NetworkStatus.loading
+                  loginProvider.getStatus == NetworkStatus.loading || loginProvider.getSetCheckUsetExistOnLoginStatus ==NetworkStatus.loading
                       ? Helper.backDropFilter(context)
                       : Text("Manish shrestha"),
                   Text("id${loginProvider.id}"),
@@ -157,19 +156,27 @@ class _LoginState extends State<Login> {
                                 Helper.displaySnakBar(context, "wrong");
                               }
                             } else {
-                              await loginProvider.postLoginValueToDataBase();
-
-                              if (loginProvider.getStatus ==
+                              await loginProvider.checkUserExistOnLogin();
+                              if (loginProvider
+                                      .getSetCheckUsetExistOnLoginStatus ==
                                   NetworkStatus.success) {
                                 Helper.displaySnakBar(
-                                    context, "successfully login");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginHome()));
-                              } else {
-                                Helper.displaySnakBar(context,
-                                    loginProvider.errorMessage.toString());
+                                    context, "Already login by this number");
+                              } else  {
+                                await loginProvider.postLoginValueToDataBase();
+
+                                if (loginProvider.getStatus ==
+                                    NetworkStatus.success) {
+                                  Helper.displaySnakBar(
+                                      context, "successfully login");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginHome()));
+                                } else {
+                                  Helper.displaySnakBar(context,
+                                      loginProvider.errorMessage.toString());
+                                }
                               }
                             }
                           }

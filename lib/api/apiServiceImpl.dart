@@ -156,4 +156,23 @@ class ApiServiceImpl extends ApiService {
         await api.postApi(ApiConst.api + ApiConst.baseUrl, testModel.toJson());
     return apiResponse;
   }
+
+  @override
+  Future<ApiResponse> checkUserDataOnLogin(LoginModel loginModel) async {
+    bool isUserExistOnFirebase = false;
+    try {
+      var value = await FirebaseFirestore.instance
+          .collection("login")
+          .where("contact", isEqualTo: loginModel.contact)
+          .get();
+      if (value.docs.isNotEmpty) {
+        isUserExistOnFirebase = true;
+      }
+      return ApiResponse(
+          networkStatus: NetworkStatus.success, data: isUserExistOnFirebase);
+    } catch (e) {
+      return ApiResponse(
+          networkStatus: NetworkStatus.error, errorMesssage: e.toString());
+    }
+  }
 }

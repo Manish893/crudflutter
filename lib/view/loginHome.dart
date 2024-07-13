@@ -43,7 +43,6 @@ class _LoginHomeState extends State<LoginHome> {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 50,
                               margin: EdgeInsets.only(left: 10, right: 10),
                               decoration: BoxDecoration(
                                   color: Colors.grey[200],
@@ -62,6 +61,8 @@ class _LoginHomeState extends State<LoginHome> {
                                             "Name:${loginProvider.userData[index].name}"),
                                         Text(
                                             "Password:${loginProvider.userData[index].password}"),
+                                        Text(
+                                            "Contact:${loginProvider.userData[index].contact}"),
                                       ],
                                     ),
                                   ),

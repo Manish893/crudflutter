@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652774147411",
+    "project_id": "bdelete-5657a",
+    "storage_bucket": "bdelete-5657a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652774147411:android:e06e0ef8fa6ed865f60da6",
+        "android_client_info": {
+          "package_name": "com.bdelete.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClvgsb0SMpGFqePcWzqOS7R3487V5eGe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

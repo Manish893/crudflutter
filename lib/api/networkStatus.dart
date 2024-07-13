@@ -1,0 +1,1 @@
+enum NetworkStatus{loading,ldel,success,error}
